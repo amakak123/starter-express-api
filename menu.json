@@ -1,0 +1,50 @@
+{
+  "menu": [
+    {
+      "name": ".wikipedia",
+      "s_command": "gass()",
+      "info": "pencarian satu kata wikipedia",
+      "function": "async function getInpo(cari) {return new Promise(async (gaas, err) => {const Res = [];const queryParams = querystring.stringify({action: 'query',format: 'json',list: 'search',srsearch: cari,srlimit: 10,srwhat: 'text'});try {const response = await axios.get(`https://id.wikipedia.org/w/api.php?${queryParams}`);const data = response.data;if (data.query && data.query.search) {data.query.search.forEach((item, index) => {const tex = item.snippet + '<';const extractedText = tex.match(/>(.*?)</g).map(match => match.slice(1, -1));const formattedResult = `${index + 1}. ${extractedText.join(' ')}`;Res.push(formattedResult);});}gaas(Res.join('\\n'))} catch (error) {console.error('Error:', error);err(Res.join('\\n'))}})}",
+      "s_function": "async function gass(){const hasil = await getInpo(prompt.replace('.wikipedia',''));console.log(hasil);soket.sendMessage(wa_number,{text:hasil})}"
+    },
+    {
+      "name": ".bingImageAi",
+      "function": "function imagegen(prompt) {\n        return new Promise((ngik, ngok) => {\n            axios.get('https://image.tamsisxcode.repl.co/generate/'+prompt.replace(' ','%20'))\n                .then(gen => {\n                    if (gen.data.result) {\n                        ngik(gen.data.result);\n                    } else {\n                        ngok(gen.data);\n                    }\n                })\n        });\n    }",
+      "s_function": "async function gass(){\n                                if (u_comand.split('=|=')[0]==='cookies.update'){\n                                    const formData = new FormData();\n                                    formData.append('cok',u_comand.split('=|=')[1])\n                                    const log = await axios.post('https://frontkoshercomputergame.muhamadidris4.repl.co/cookies', formData);\n                                    textMessage(JSON.stringify(log.data));\n                                }else{\n                                    try{\n                                        const reslt = await imagegen(u_comand)\n                                        for (url of reslt){\n                                            imageMessage({url:url})\n                                        }}\n                                    catch(err){\n                                        textMessage(JSON.stringify(err))\n                                    }\n                                }\n                            }",
+      "s_command": "gass()"
+    },
+    {
+      "name": ".xjilbab",
+      "function": "async function gass(cari,page){\n                        const resu = (await axios.get(`https://pekobapi.tamsisxcode.repl.co/xjilbab/${cari}/${page}`)).data\n                        let hasil = 'Hasil pencarian '+cari\n                        if (resu.result){\n                            for (x of resu.result){\n                                hasil += `\n🚩 *judul* : ${x.title}\n🚩 *tonton* : ${x['v_url']}\n🚩 *download* : ${x['d_url']}\n`\n                            }\n                        }\n                        hasil += '\\nJika ingin unduh langsung di WA ketik .download <url>'\n                        textMessage(hasil)\n                        \n                    }",
+      "s_command": "gass(u_comand.split('|')[0],u_comand.split('|')[1])",
+      "s_function": "//"
+    },
+    {
+      "name": ".download",
+      "s_command": "\nconst bufferPromise = axios.get(u_comand, { responseType: 'arraybuffer' }).then(response => Buffer.from(response.data));\nbufferPromise.then(bufferPromise=>{\nconsole.log(bufferPromise);\nsoket.sendMessage(wa_number, { document: bufferPromise, mimetype: 'video/mp4',fileName:'videos.mp4'}, {quoted:fakeReplys})})",
+      "function": "//",
+      "s_function": "//"
+    },
+    {
+      "name": ".xvideos",
+      "function": "async function gass(cari,page){\n                        const resu = (await axios.get(`https://pekobapi.tamsisxcode.repl.co/xvideos/${cari}/${page}`)).data\n                        let hasil = 'Hasil pencarian '+cari\n                        if (resu.result){\n                            for (x of resu.result){\n                                hasil += `\n🚩 *judul* : ${x.title}\n🚩 *tonton* : ${x['v_url']}\n🚩 *download* : ${x['d_url']}\n`\n                            }\n                        }\n                        hasil += '\\nJika ingin unduh langsung di WA ketik .download <url>'\n                        textMessage(hasil)\n                        \n                    }",
+      "s_command": "gass(u_comand.split('|')[0],u_comand.split('|')[1])",
+      "s_function": "//"
+    },
+    {
+      "name": ".poling",
+      "function": "//",
+      "s_command": "soket.sendMessage(wa_number,{\n                    poll:{\n                      name:u_comand.split('|')[0],\n                      values: u_comand.split('|')[1].split(','),\n                      selectableCount: 0\n                    }\n\n                    \n                  })",
+      "s_function": "//"
+    },
+    {
+      "name": ".mention",
+      "s_function": "async function gass() {\n    const list = await soket.groupMetadata(wa_number);\n    const num = [];\n\n    if (list.participants) {\n        for (const lis of list.participants) {\n            if (lis.id) num.push(lis.id);\n        }\n    }\n\n    soket.sendMessage(wa_number, {\n        text: '*Penting!*\\nPesan dari @' + m.key.participant.split('@')[0] + ' : \\n' + u_comand,\n        mentions: num},\n        {quoted: fakeReplys}\n    );\n}",
+      "s_command": "gass()",
+      "function": "//none"
+    },
+    {
+      "name": ".doods"
+    }
+  ]
+}
