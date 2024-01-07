@@ -1,7 +1,7 @@
 
 const axios = require('axios'); 
-//var {Bugil}=require('./bug')
-//console.log(Bugil)
+var {Bugil}=require('./bug')
+console.log(Bugil)
 
 const Pino = require('pino');
 const FormData = require('form-data')
@@ -9,27 +9,27 @@ const fs = require('fs');
 const request = require('request-promise');
 const https = require('https');
 const cheerio = require('cheerio');
-//const modules = require('./mod');
-//for (const im in modules){
-//    eval(modules[im].toString())
-//}
-//console.log(modules)
-//const all = fs.readFileSync('mod.js','utf-8');
+const modules = require('./mod');
+for (const im in modules){
+    eval(modules[im].toString())
+}
+console.log(modules)
+const all = fs.readFileSync('mod.js','utf-8');
 const moment = require('moment-timezone');
 //console.log(moment(1000).tz("Asia/Kolkata").format("DD/MM/YYYY HH:mm:ss"))
 const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType } = require('@whiskeysockets/baileys')
-//const logo = fs.readFileSync('logo.jpg');
+const logo = fs.readFileSync('logo.jpg');
 const querystring = require("querystring");
 const { useMultiFileAuthState} = require("@whiskeysockets/baileys");
 const {downloadMediaMessage} = require('@whiskeysockets/baileys')
 const { default : makeWaSocket } = require("@whiskeysockets/baileys");
 let stutu = false;
 let comand = []
-//let dic = JSON.parse(fs.readFileSync('menu.json', 'utf8'))
-//let menu = dic.menu
-//for (menuq of menu){
-//    comand.push(menuq.name)
-//}
+let dic = JSON.parse(fs.readFileSync('menu.json', 'utf8'))
+let menu = dic.menu
+for (menuq of menu){
+    comand.push(menuq.name)
+}
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -51,7 +51,7 @@ async function konek(){
         logger: Pino({ level: "silent" })
     });
    // console.log(soket)
-    soket.ev.on("creds.update", auth.saveCreds);
+//    soket.ev.on("creds.update", auth.saveCreds);
     soket.ev.on("connection.update", ({ connection }) => {
         if (connection === "open") {
             console.log("Wa yang tersambung : " + soket.user.id.split(':')[0])
@@ -286,8 +286,8 @@ Follow sosmed ku gan :
 🚩 .menu
 🚩 .jalantikus
 🚩 .toUrl
-🚩 .sticker`,
-//${listmenu}`,
+🚩 .sticker
+${listmenu}`,
                         //mentions:[wa_number],
                         contextInfo:{
                             mentionedJid: [userg],
@@ -295,7 +295,7 @@ Follow sosmed ku gan :
                                 title:'SimpleBot',
                                 body: 'Tamsis X Code',
                                 //canonicalUrl: 'https://www.facebook.com/',
-  //                              thumbnail: logo,
+                                thumbnail: logo,
                                 sourceUrl:'https://github.com/kaii-devv',
                                 sourceType:"PHOTO",
                                 previewType:0,
@@ -387,6 +387,7 @@ app.get('/', (req, res) => {
     res.send({'play':stutu});
   }
 });
+konek()
 //module.exports = app;
 //app.listen()
 app.listen(process.env.PORT || 3000)
